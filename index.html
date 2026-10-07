@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mineluke's Server</title>
+<meta name="description" content="The home of Mineluke's community, projects & downloads." />
+
+<!-- =====================================================================
+     EDIT ME — every link and piece of text on the page lives in CONFIG.
+     Change the values below, save, refresh. No other code needs touching.
+     ===================================================================== -->
+<script>
+const CONFIG = {
+  // ---------- Links ----------
+  discordInvite: "https://discord.gg/YOUR-INVITE",   // full invite link
+  discordInviteCode: "YOUR-INVITE",                  // just the code (used to fetch the live member count)
+  youtubeUrl: "https://www.youtube.com/@Mineluke",
+  youtubeSubscribeUrl: "https://www.youtube.com/@Mineluke?sub_confirmation=1",
+  tiktokUrl: "https://www.tiktok.com/@mineluke",
+
+  // ---------- Hero ----------
+  siteName: "Mineluke's Server",
+  tagline: "The home of Mineluke's community, projects & downloads.",
+  joinButtonText: "Join the Discord",
+  // Fallback numbers shown if the live Discord count can't be loaded
+  fallbackMembers: 12480,
+  fallbackOnline: 1873,
+
+  // ---------- About ----------
+  aboutTitle: "Who's Mineluke?",
+  aboutText: [
+    "Mineluke is a YouTuber who makes videos about Fortnite projects, private servers, old builds and everything in between.",
+    "This server is where the community hangs out: catch new uploads first, follow project updates, grab downloads, show off your own content and get help from people who know their stuff."
+  ],
+  aboutStats: [
+    { value: "24/7", label: "Active chat" },
+    { value: "2",    label: "Projects in the works" },
+    { value: "100%", label: "Free to join" }
+  ],
+
+  // ---------- Latest videos ----------
+  // videoId = the part after "watch?v=" in a YouTube link. Leave blank to show a placeholder thumbnail.
+  videos: [
+    { title: "Project Ember — First Look (Beta Gameplay)", date: "Oct 2, 2026", videoId: "" },
+    { title: "How to Play OG Fortnite on a Private Server", date: "Sep 24, 2026", videoId: "" },
+    { title: "Project Christmas Is Coming… Here's Everything", date: "Sep 15, 2026", videoId: "" },
+    { title: "Every Old Fortnite Build You Can Still Launch", date: "Sep 3, 2026", videoId: "" },
+    { title: "Reboot Setup Guide (Beginner Friendly)", date: "Aug 27, 2026", videoId: "" },
+    { title: "I Rebuilt Season 1 With My Community", date: "Aug 18, 2026", videoId: "" }
+  ],
+
+  // ---------- Projects ----------
+  projects: [
+    {
+      name: "Project Ember",
+      status: "Beta",
+      description: "An OG-style Fortnite project bringing back the classic feel — the old map, old loot pool and the gameplay you remember.",
+      platforms: ["PS4", "PS5", "PC", "Mobile"],
+      linkText: "More info in Discord"
+    },
+    {
+      name: "Project Christmas",
+      status: "Coming Soon",
+      description: "A winter-themed OG-style project packed with festive POIs, snowy drops and holiday events. Stay tuned in #project-news.",
+      platforms: ["PS4", "PS5", "PC", "Mobile"],
+      linkText: "More info in Discord"
+    }
+  ],
+
+  // ---------- What's in the server ----------
+  features: [
+    { icon: "news",     title: "News",      channels: ["announcements", "project-news", "giveaways"],
+      text: "Server announcements, project updates and giveaways — never miss a drop." },
+    { icon: "youtube",  title: "YouTube",   channels: ["mineluke-videos", "community-content"],
+      text: "Every new Mineluke upload, plus videos made by the community." },
+    { icon: "download", title: "Downloads", channels: ["private-servers", "fortnite-builds", "reboot-stuff", "mineluke-paks"],
+      text: "Private servers, Fortnite builds, Reboot files and Mineluke's own paks." },
+    { icon: "chat",     title: "Community", channels: ["general", "bot-commands", "self-promo", "voice-channels"],
+      text: "Chat, run bot commands, promote your stuff and hop in voice." }
+  ],
+
+  // ---------- Roles ----------
+  roles: [
+    { name: "Moderator",      color: "#ff5f6d", how: "Hand-picked by Mineluke from trusted, long-time members." },
+    { name: "Helper",         color: "#4fa3ff", how: "Consistently help others in support channels and apply when apps open." },
+    { name: "YouTube Member", color: "#ffc94d", how: "Join the YouTube channel membership and link your account to Discord." },
+    { name: "Big Creator",    color: "#b57bff", how: "Make Fortnite content with a sizeable audience, then open a ticket to apply." }
+  ],
+
+  // ---------- Rules ----------
+  rules: [
+    { title: "Be respectful",        text: "No harassment, hate speech or drama. Treat everyone like a human." },
+    { title: "No skidded projects",  text: "Don't post stolen or reskinned projects in #self-promo. Give credit where it's due." },
+    { title: "No spam",              text: "No message flooding, mass pings or unsolicited DMs to members." },
+    { title: "Follow Discord ToS",   text: "Discord's Terms of Service and Community Guidelines apply here at all times." },
+    { title: "Use the right channel", text: "Keep things on topic — downloads questions go in support, memes go in general." },
+    { title: "Listen to staff",      text: "Moderators have the final say. If you disagree, open a ticket instead of arguing." }
+  ],
+
+  // ---------- FAQ ----------
+  faq: [
+    { q: "How do I get downloads?",
+      a: "Join the Discord, read the rules and verify. The Downloads category will unlock, with private servers, builds, Reboot files and Mineluke paks." },
+    { q: "How do I become a Big Creator?",
+      a: "Make Fortnite content with a solid audience, then open a ticket in the server with links to your channel. Staff review every application." },
+    { q: "Is it free to join?",
+      a: "Yes — 100% free. Anyone can join. YouTube Member is an optional perk for supporting the channel." },
+    { q: "When does Project Christmas release?",
+      a: "No date yet. Turn on notifications for #project-news to hear about it first." },
+    { q: "What platforms does Project Ember support?",
+      a: "PS4, PS5, PC and Mobile. It's currently in beta, so expect bugs and updates." }
+  ],
+
+  // ---------- Footer ----------
+  copyright: "© 2026 Mineluke's Server. All rights reserved.",
+  disclaimer: "Not affiliated with, endorsed by, or connected to Epic Games. Fortnite is a trademark of Epic Games, Inc."
+};
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0b0f0c;
+    --bg-2: #0f1511;
+    --card: #111813;
+    --card-2: #141d17;
+    --line: #1e2a22;
+    --green: #3ddc84;
+    --green-dim: rgba(61, 220, 132, 0.15);
+    --green-glow: rgba(61, 220, 132, 0.45);
+    --text: #e6efe9;
+    --muted: #8a9a90;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 14px;
+    --max: 1160px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: var(--green); color: var(--bg); }
+
+  /* subtle grid background */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(61,220,132,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(61,220,132,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  .mono { font-family: var(--mono); }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 15, 12, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 800; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 32px; height: 32px; border-radius: 9px;
+    display: grid; place-items: center;
+    background: var(--green-dim); border: 1px solid var(--green);
+    box-shadow: 0 0 14px var(--green-glow);
+    color: var(--green); font-size: 15px;
+  }
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    padding: 8px 12px; border-radius: 8px; transition: color .2s, background .2s;
+  }
+  .nav-links a:hover { color: var(--green); background: var(--green-dim); }
+  .nav-cta { display: inline-flex; }
+  .menu-btn {
+    display: none; background: none; border: 1px solid var(--line); color: var(--text);
+    width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+  }
+  .menu-btn svg { width: 20px; height: 20px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--mono); font-weight: 600; font-size: 14px;
+    padding: 12px 20px; border-radius: 10px; border: 1px solid var(--green);
+    cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .btn-primary { background: var(--green); color: #06110a; }
+  .btn-primary:hover { box-shadow: 0 0 0 4px var(--green-dim), 0 0 28px var(--green-glow); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--green); }
+  .btn-ghost:hover { background: var(--green-dim); box-shadow: 0 0 22px var(--green-dim); transform: translateY(-2px); }
+  .btn-lg { font-size: 17px; padding: 17px 30px; border-radius: 12px; }
+  .btn-sm { font-size: 13px; padding: 9px 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 110px 0 90px; text-align: center; overflow: hidden; }
+  .hero::after {
+    content: ""; position: absolute; left: 50%; top: -120px; transform: translateX(-50%);
+    width: 760px; height: 520px; max-width: 120vw;
+    background: radial-gradient(circle, rgba(61,220,132,0.18), transparent 65%);
+    filter: blur(20px); pointer-events: none; z-index: -1;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+    font-family: var(--mono); font-size: 13px; color: var(--text);
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .badge .sep { width: 1px; height: 14px; background: var(--line); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); position: relative; }
+  .dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid var(--green); animation: ping 1.8s ease-out infinite;
+  }
+  .dot.grey { background: #6b7a71; }
+  .dot.grey::after { display: none; }
+  @keyframes ping { 0% { transform: scale(.5); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+  .badge b { color: var(--green); font-weight: 600; }
+
+  .hero-tag { font-family: var(--mono); color: var(--green); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 {
+    font-family: var(--mono); font-weight: 800;
+    font-size: clamp(40px, 8.5vw, 92px); line-height: 1.02; letter-spacing: -0.04em;
+    margin-bottom: 22px;
+  }
+  .hero h1 .accent { color: var(--green); text-shadow: 0 0 30px var(--green-glow); }
+  .cursor { display: inline-block; width: .5em; height: .85em; background: var(--green); margin-left: 6px; vertical-align: -0.06em; animation: blink 1.1s steps(1) infinite; box-shadow: 0 0 18px var(--green-glow); }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero p.lead { font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); max-width: 620px; margin: 0 auto 38px; }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- Section + Discord-style category divider ---------- */
+  section { padding: 70px 0; }
+  .cat {
+    display: flex; align-items: center; gap: 16px;
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    color: var(--green); text-transform: none; letter-spacing: .02em;
+    margin-bottom: 14px; white-space: nowrap;
+  }
+  .cat::before, .cat::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green));
+    box-shadow: 0 0 8px var(--green-glow);
+  }
+  .cat::after { background: linear-gradient(90deg, var(--green), transparent); }
+  .cat span { text-shadow: 0 0 12px var(--green-glow); }
+  .cat .dash { opacity: .7; }
+  .section-title { font-family: var(--mono); font-weight: 800; font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.03em; text-align: center; margin-bottom: 10px; }
+  .section-sub { text-align: center; color: var(--muted); max-width: 600px; margin: 0 auto 44px; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: linear-gradient(180deg, var(--card-2), var(--card));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+  }
+  .card:hover { border-color: rgba(61,220,132,.55); box-shadow: 0 0 0 1px rgba(61,220,132,.15), 0 10px 40px -10px var(--green-glow); transform: translateY(-4px); }
+  .grid { display: grid; gap: 20px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: stretch; }
+  .about-text { padding: 32px; }
+  .about-text h3 { font-family: var(--mono); font-size: 22px; margin-bottom: 14px; }
+  .about-text p { color: var(--muted); margin-bottom: 14px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .stats { display: grid; gap: 14px; }
+  .stat { padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .stat .v { font-family: var(--mono); font-weight: 800; font-size: 30px; color: var(--green); text-shadow: 0 0 18px var(--green-glow); }
+  .stat .l { color: var(--muted); font-size: 14px; text-align: right; }
+
+  /* Videos */
+  .video { overflow: hidden; display: flex; flex-direction: column; }
+  .thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0d130f; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .video:hover .thumb img, .video:hover .thumb .ph { transform: scale(1.05); }
+  .ph {
+    position: absolute; inset: 0; transition: transform .4s;
+    display: grid; place-items: center;
+    background:
+      radial-gradient(circle at 25% 30%, rgba(61,220,132,.35), transparent 45%),
+      radial-gradient(circle at 80% 80%, rgba(61,220,132,.18), transparent 50%),
+      repeating-linear-gradient(135deg, #0f1712 0 14px, #0c120e 14px 28px);
+  }
+  .ph span { font-family: var(--mono); font-weight: 800; font-size: 13px; color: var(--green); letter-spacing: .14em; opacity: .75; padding: 0 16px; text-align: center; }
+  .play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.85);
+    width: 58px; height: 58px; border-radius: 50%;
+    background: rgba(11,15,12,.75); border: 1px solid var(--green);
+    display: grid; place-items: center; opacity: 0; transition: opacity .25s, transform .25s;
+    box-shadow: 0 0 24px var(--green-glow);
+  }
+  .play svg { width: 22px; height: 22px; color: var(--green); margin-left: 3px; }
+  .video:hover .play { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .video-body { padding: 16px 18px 18px; }
+  .video-body h4 { font-size: 15px; font-weight: 600; line-height: 1.4; margin-bottom: 6px; }
+  .video-body time { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .center-row { display: flex; justify-content: center; margin-top: 36px; }
+
+  /* Projects */
+  .project { padding: 28px; display: flex; flex-direction: column; gap: 16px; position: relative; overflow: hidden; }
+  .project::before {
+    content: ""; position: absolute; right: -60px; top: -60px; width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(61,220,132,.16), transparent 70%); pointer-events: none;
+  }
+  .project-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .project-icon { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: var(--green-dim); border: 1px solid rgba(61,220,132,.4); color: var(--green); }
+  .project-icon svg { width: 24px; height: 24px; }
+  .project h3 { font-family: var(--mono); font-size: 24px; letter-spacing: -0.02em; }
+  .project p { color: var(--muted); }
+  .status {
+    font-family: var(--mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+    padding: 5px 10px; border-radius: 6px; border: 1px solid;
+  }
+  .status.beta { color: var(--green); border-color: var(--green); background: var(--green-dim); box-shadow: 0 0 12px var(--green-dim); }
+  .status.soon { color: #ffc94d; border-color: rgba(255,201,77,.6); background: rgba(255,201,77,.1); }
+  .platforms { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 12px; padding: 5px 10px; border-radius: 6px; background: #0c120e; border: 1px solid var(--line); color: var(--text); }
+  .meta-label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 8px; }
+  .link-arrow { font-family: var(--mono); font-size: 14px; color: var(--green); display: inline-flex; align-items: center; gap: 8px; margin-top: auto; width: fit-content; }
+  .link-arrow svg { width: 16px; height: 16px; transition: transform .2s; }
+  .link-arrow:hover svg { transform: translateX(4px); }
+  .link-arrow:hover { text-shadow: 0 0 12px var(--green-glow); }
+
+  /* Features */
+  .feature { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .feature .ico { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: var(--green-dim); color: var(--green); border: 1px solid rgba(61,220,132,.35); }
+  .feature .ico svg { width: 22px; height: 22px; }
+  .feature h3 { font-family: var(--mono); font-size: 18px; }
+  .feature p { color: var(--muted); font-size: 14px; }
+  .channels { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+  .channels li { font-family: var(--mono); font-size: 13px; color: #b9c8bf; padding: 5px 8px; border-radius: 6px; transition: background .2s, color .2s; }
+  .channels li::before { content: "# "; color: var(--muted); }
+  .channels li.voice::before { content: "🔊 "; }
+  .channels li:hover { background: var(--green-dim); color: var(--green); }
+
+  /* Roles */
+  .role { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .role-tag {
+    display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid;
+  }
+  .role-tag i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .role p { color: var(--muted); font-size: 14px; }
+
+  /* Rules */
+  .rules { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; counter-reset: rule; }
+  .rule { padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; }
+  .rule .n { font-family: var(--mono); font-weight: 800; color: var(--green); font-size: 14px; padding: 4px 8px; border-radius: 6px; background: var(--green-dim); flex-shrink: 0; }
+  .rule h4 { font-size: 15px; margin-bottom: 2px; }
+  .rule p { color: var(--muted); font-size: 14px; }
+
+  /* FAQ */
+  .faq { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { overflow: hidden; }
+  .faq-item:hover { transform: none; }
+  .faq-q {
+    width: 100%; background: none; border: 0; color: var(--text); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 20px 22px; text-align: left; font: 600 16px var(--sans);
+  }
+  .faq-q .pm { font-family: var(--mono); color: var(--green); font-size: 20px; transition: transform .3s; flex-shrink: 0; }
+  .faq-item.open { border-color: rgba(61,220,132,.55); }
+  .faq-item.open .pm { transform: rotate(45deg); }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .faq-a > div { overflow: hidden; }
+  .faq-a p { padding: 0 22px 20px; color: var(--muted); }
+  .faq-item.open .faq-a { grid-template-rows: 1fr; }
+  .faq-q:focus-visible, .btn:focus-visible, a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* CTA band */
+  .cta {
+    padding: 48px 32px; text-align: center; position: relative; overflow: hidden;
+    border-color: rgba(61,220,132,.35);
+    background: radial-gradient(ellipse at 50% 0%, rgba(61,220,132,.16), transparent 60%), var(--card);
+  }
+  .cta:hover { transform: none; }
+  .cta h2 { font-family: var(--mono); font-size: clamp(24px, 4vw, 36px); letter-spacing: -0.03em; margin-bottom: 10px; }
+  .cta p { color: var(--muted); margin-bottom: 26px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 40px 0 34px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .socials { display: flex; gap: 10px; }
+  .socials a {
+    width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center;
+    background: var(--card); border: 1px solid var(--line); color: var(--muted);
+    transition: color .2s, border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .socials a svg { width: 20px; height: 20px; }
+  .socials a:hover { color: var(--green); border-color: var(--green); box-shadow: 0 0 18px var(--green-glow); transform: translateY(-2px); }
+  .legal { margin-top: 26px; padding-top: 22px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+  .legal .mono { font-size: 12px; }
+
+  /* Fade-in on scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .dot::after, .cursor { animation: none; }
+    .card, .btn { transition: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .g4 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .nav-links {
+      position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: rgba(11,15,12,.97); border-bottom: 1px solid var(--line);
+      padding: 8px 16px 16px; display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { display: block; padding: 12px; font-size: 15px; }
+    .menu-btn { display: grid; place-items: center; }
+    .nav-cta { display: none; }
+    .about { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .stat { flex-direction: column; align-items: flex-start; }
+    .stat .l { text-align: left; }
+    .g2, .rules { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 54px 0; }
+    .wrap { padding: 0 16px; }
+    .hero { padding: 72px 0 60px; }
+    .g3, .g4 { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { flex-direction: row; align-items: center; }
+    .stat .l { text-align: right; }
+    .about-text, .project { padding: 22px; }
+    .btn-lg { width: 100%; }
+    .hero-actions .btn { width: 100%; }
+    .cat { font-size: 12px; gap: 10px; }
+    .cat .dash { display: none; }
+    .foot { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="brand-mark">M</span><span data-text="siteName"></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#server">Server</a></li>
+      <li><a href="#roles">Roles</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm nav-cta" data-href="discordInvite" target="_blank" rel="noopener">
+      <svg data-icon="discord"></svg>Join
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- 1. HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="badge reveal" aria-live="polite">
+        <span class="dot"></span><span><b id="onlineCount">—</b> online</span>
+        <span class="sep"></span>
+        <span class="dot grey"></span><span><b id="memberCount">—</b> members</span>
+      </div>
+      <div class="hero-tag reveal">// official discord community</div>
+      <h1 class="reveal"><span id="heroTitle"></span><span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lead reveal" data-text="tagline"></p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary btn-lg" data-href="discordInvite" target="_blank" rel="noopener">
+          <svg data-icon="discord"></svg><span data-text="joinButtonText"></span>
+        </a>
+        <a class="btn btn-ghost btn-lg" data-href="youtubeUrl" target="_blank" rel="noopener">
+          <svg data-icon="youtube"></svg>Watch on YouTube
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 👋 ] About <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">Welcome to the server</h2>
+      <p class="section-sub reveal">Fortnite projects, private servers, game builds and creators — all in one place.</p>
+      <div class="about">
+        <div class="card about-text reveal">
+          <h3 data-text="aboutTitle"></h3>
+          <div id="aboutText"></div>
+        </div>
+        <div class="stats" id="aboutStats"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LATEST VIDEOS -->
+  <section id="videos">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 🎬 ] Latest Videos <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">Fresh from the channel</h2>
+      <p class="section-sub reveal">New uploads land in <span class="mono">#mineluke-videos</span> the second they drop.</p>
+      <div class="grid g3" id="videoGrid"></div>
+      <div class="center-row reveal">
+        <a class="btn btn-primary" data-href="youtubeSubscribeUrl" target="_blank" rel="noopener">
+          <svg data-icon="youtube"></svg>Subscribe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 🛠️ ] Projects <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">What we're building</h2>
+      <p class="section-sub reveal">OG-style Fortnite projects made by and for the community.</p>
+      <div class="grid g2" id="projectGrid"></div>
+    </div>
+  </section>
+
+  <!-- 5. WHAT'S IN THE SERVER -->
+  <section id="server">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 📰 ] Mineluke News <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">What's in the server</h2>
+      <p class="section-sub reveal">A quick look at the categories and channels waiting for you.</p>
+      <div class="grid g4" id="featureGrid"></div>
+    </div>
+  </section>
+
+  <!-- 6. ROLES -->
+  <section id="roles">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 🏷️ ] Community Roles <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">Earn your colour</h2>
+      <p class="section-sub reveal">Roles show who's who in the community — here's how to get each one.</p>
+      <div class="grid g4" id="roleGrid"></div>
+    </div>
+  </section>
+
+  <!-- 7. RULES -->
+  <section id="rules">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ 📜 ] Rules <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">Keep it clean</h2>
+      <p class="section-sub reveal">The short version. Full rules are pinned in the server.</p>
+      <ol class="rules" id="ruleList"></ol>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="cat reveal"><span><span class="dash">——</span> [ ❓ ] FAQ <span class="dash">——</span></span></div>
+      <h2 class="section-title reveal">Questions?</h2>
+      <p class="section-sub reveal">Still stuck after this? Ask in the server — someone will help.</p>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="card cta reveal">
+        <h2>Ready to jump in?</h2>
+        <p>Join the community, grab the downloads and say hi in #general.</p>
+        <a class="btn btn-primary btn-lg" data-href="discordInvite" target="_blank" rel="noopener">
+          <svg data-icon="discord"></svg><span data-text="joinButtonText"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 9. FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="brand"><span class="brand-mark">M</span><span data-text="siteName"></span></a>
+      <div class="socials">
+        <a data-href="youtubeUrl" target="_blank" rel="noopener" aria-label="YouTube"><svg data-icon="youtube"></svg></a>
+        <a data-href="tiktokUrl" target="_blank" rel="noopener" aria-label="TikTok"><svg data-icon="tiktok"></svg></a>
+        <a data-href="discordInvite" target="_blank" rel="noopener" aria-label="Discord"><svg data-icon="discord"></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <span data-text="copyright"></span>
+      <span class="mono" data-text="disclaimer"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const C = CONFIG;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  // ---------- Simple original line icons ----------
+  const ICONS = {
+    discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15.6 15.6 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.2 1.3C1.7 9.3 1 13.2 1.3 17a17 17 0 0 0 5.2 2.6l1.1-1.8a11 11 0 0 1-1.7-.8l.4-.3a12.2 12.2 0 0 0 11.4 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.8a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-3.1-11.7ZM8.7 14.7c-1 0-1.9-1-1.9-2.1S7.6 10.5 8.7 10.5s1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.8 4.7 12 4.7 12 4.7s-6.8 0-8.5.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1 12a29 29 0 0 0 .5 4.8 2.8 2.8 0 0 0 2 2c1.7.5 8.5.5 8.5.5s6.8 0 8.5-.5a2.8 2.8 0 0 0 2-2A29 29 0 0 0 23 12a29 29 0 0 0-.5-4.8ZM9.8 15.1V8.9l5.6 3.1-5.6 3.1Z"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 1 0 5.4 6.3V8.6a7.9 7.9 0 0 0 4.6 1.5V6.7a4.6 4.6 0 0 1-4.6-4.7Z"/></svg>',
+    news: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H6a2 2 0 0 1-2-2V5Z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 16h3"/></svg>',
+    download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>',
+    flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4-3-6.5-4-10-2 1.5-3 3.5-3 6-1-1-2-2-2.2-3.5C7.5 9.5 5 12 5 15a7 7 0 0 0 7 7Z"/><path d="M12 22a3 3 0 0 0 3-3c0-2-1.5-3-3-5-1.5 2-3 3-3 5a3 3 0 0 0 3 3Z"/></svg>',
+    snow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4.9 7l14.2 10M4.9 17 19.1 7"/><path d="m9 4 3 2 3-2M9 20l3-2 3 2M3.5 10.5 5 7.3 3.2 5M20.5 13.5 19 16.7l1.8 2.3M3.5 13.5 5 16.7 3.2 19M20.5 10.5 19 7.3l1.8-2.3"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5-13-7.5Z"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  };
+  const icon = (n) => ICONS[n] || "";
+  $$("svg[data-icon]").forEach((el) => { el.outerHTML = icon(el.dataset.icon); });
+
+  // ---------- Fill text + links from CONFIG ----------
+  $$("[data-text]").forEach((el) => { el.textContent = C[el.dataset.text] ?? ""; });
+  $$("[data-href]").forEach((el) => { el.href = C[el.dataset.href] ?? "#"; });
+  document.title = C.siteName;
+
+  // Hero title: highlight the last word in green
+  const words = C.siteName.trim().split(" ");
+  const last = words.pop();
+  $("#heroTitle").innerHTML = (words.length ? esc(words.join(" ")) + " " : "") + '<span class="accent">' + esc(last) + "</span>";
+
+  // About
+  $("#aboutText").innerHTML = C.aboutText.map((p) => "<p>" + esc(p) + "</p>").join("");
+  $("#aboutStats").innerHTML = C.aboutStats.map((s) =>
+    '<div class="card stat reveal"><span class="v">' + esc(s.value) + '</span><span class="l">' + esc(s.label) + "</span></div>"
+  ).join("");
+
+  // Videos
+  $("#videoGrid").innerHTML = C.videos.map((v) => {
+    const href = v.videoId ? "https://www.youtube.com/watch?v=" + encodeURIComponent(v.videoId) : C.youtubeUrl;
+    const thumb = v.videoId
+      ? '<img loading="lazy" src="https://i.ytimg.com/vi/' + encodeURIComponent(v.videoId) + '/hqdefault.jpg" alt="">'
+      : '<div class="ph"><span>' + esc(v.title.split(/[—:|-]/)[0].trim().toUpperCase()) + "</span></div>";
+    return '<a class="card video reveal" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+      '<div class="thumb">' + thumb + '<div class="play">' + icon("play") + "</div></div>" +
+      '<div class="video-body"><h4>' + esc(v.title) + "</h4><time>" + esc(v.date) + "</time></div></a>";
+  }).join("");
+
+  // Projects
+  $("#projectGrid").innerHTML = C.projects.map((p, i) => {
+    const soon = /soon/i.test(p.status);
+    return '<article class="card project reveal">' +
+      '<div class="project-head"><div class="project-icon">' + icon(i === 0 ? "flame" : "snow") + "</div>" +
+      '<span class="status ' + (soon ? "soon" : "beta") + '">' + esc(p.status) + "</span></div>" +
+      "<h3>" + esc(p.name) + "</h3><p>" + esc(p.description) + "</p>" +
+      '<div><div class="meta-label">Platforms</div><div class="platforms">' +
+        p.platforms.map((x) => '<span class="chip">' + esc(x) + "</span>").join("") + "</div></div>" +
+      '<a class="link-arrow" href="' + esc(C.discordInvite) + '" target="_blank" rel="noopener">' + esc(p.linkText) + icon("arrow") + "</a>" +
+      "</article>";
+  }).join("");
+
+  // Features
+  $("#featureGrid").innerHTML = C.features.map((f) =>
+    '<div class="card feature reveal"><div class="ico">' + icon(f.icon) + "</div>" +
+    "<h3>" + esc(f.title) + "</h3><p>" + esc(f.text) + "</p>" +
+    '<ul class="channels">' + f.channels.map((c) =>
+      "<li" + (/voice/i.test(c) ? ' class="voice"' : "") + ">" + esc(c) + "</li>").join("") + "</ul></div>"
+  ).join("");
+
+  // Roles
+  $("#roleGrid").innerHTML = C.roles.map((r) =>
+    '<div class="card role reveal"><span class="role-tag" style="color:' + esc(r.color) + ";border-color:" + esc(r.color) + "66;background:" + esc(r.color) + '1a">' +
+    '<i style="background:' + esc(r.color) + ";box-shadow:0 0 10px " + esc(r.color) + '"></i>@' + esc(r.name) + "</span>" +
+    "<p>" + esc(r.how) + "</p></div>"
+  ).join("");
+
+  // Rules
+  $("#ruleList").innerHTML = C.rules.map((r, i) =>
+    '<li class="card rule reveal"><span class="n">' + String(i + 1).padStart(2, "0") + "</span>" +
+    "<div><h4>" + esc(r.title) + "</h4><p>" + esc(r.text) + "</p></div></li>"
+  ).join("");
+
+  // FAQ accordion
+  $("#faqList").innerHTML = C.faq.map((f, i) =>
+    '<div class="card faq-item reveal"><button class="faq-q" aria-expanded="false" aria-controls="faq-a-' + i + '" id="faq-q-' + i + '">' +
+    "<span>" + esc(f.q) + '</span><span class="pm" aria-hidden="true">+</span></button>' +
+    '<div class="faq-a" id="faq-a-' + i + '" role="region" aria-labelledby="faq-q-' + i + '"><div><p>' + esc(f.a) + "</p></div></div></div>"
+  ).join("");
+  $$(".faq-q").forEach((btn) => btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+    const open = !item.classList.contains("open");
+    $$(".faq-item.open").forEach((o) => { o.classList.remove("open"); $(".faq-q", o).setAttribute("aria-expanded", "false"); });
+    if (open) { item.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
+  }));
+
+  // Mobile menu
+  const menuBtn = $("#menuBtn"), navLinks = $("#navLinks");
+  menuBtn.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+  });
+  $$("#navLinks a").forEach((a) => a.addEventListener("click", () => {
+    navLinks.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false");
+  }));
+
+  // Fade-in on scroll
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }) : null;
+  $$(".reveal").forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 70 + "ms";
+    io ? io.observe(el) : el.classList.add("in");
+  });
+
+  // ---------- Live-style member count ----------
+  const fmt = (n) => Math.round(n).toLocaleString("en-US");
+  const countUp = (el, to) => {
+    const from = Number(el.dataset.v || 0), start = performance.now(), dur = 1400;
+    el.dataset.v = to;
+    const step = (t) => {
+      const k = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(from + (to - from) * e);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  let online = C.fallbackOnline, members = C.fallbackMembers, live = false;
+  const show = () => { countUp($("#memberCount"), members); countUp($("#onlineCount"), online); };
+
+  // Try the public Discord invite endpoint for real numbers; fall back to CONFIG values.
+  const code = (C.discordInviteCode || "").trim();
+  if (code && !/YOUR-INVITE/i.test(code)) {
+    fetch("https://discord.com/api/v9/invites/" + encodeURIComponent(code) + "?with_counts=true")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        if (d.approximate_member_count) { members = d.approximate_member_count; online = d.approximate_presence_count || online; live = true; }
+      })
+      .catch(() => {})
+      .finally(show);
+  } else {
+    show();
+  }
+
+  // Gentle drift on the online number so the badge feels alive
+  setInterval(() => {
+    const drift = Math.round((Math.random() - 0.5) * Math.max(4, online * 0.006));
+    online = Math.max(1, online + drift);
+    const el = $("#onlineCount"); el.dataset.v = online; el.textContent = fmt(online);
+  }, 4000);
+})();
+</script>
+</body>
+</html>
